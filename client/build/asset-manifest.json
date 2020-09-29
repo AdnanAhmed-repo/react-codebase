@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7f808b66.chunk.css",
+    "main.js": "/static/js/main.b57e69cf.chunk.js",
+    "main.js.map": "/static/js/main.b57e69cf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
+    "static/js/2.ebbda7aa.chunk.js": "/static/js/2.ebbda7aa.chunk.js",
+    "static/js/2.ebbda7aa.chunk.js.map": "/static/js/2.ebbda7aa.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.cff825c84be2d8230b485b25a9dbf8f9.js": "/precache-manifest.cff825c84be2d8230b485b25a9dbf8f9.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.7f808b66.chunk.css.map": "/static/css/main.7f808b66.chunk.css.map",
+    "static/js/2.ebbda7aa.chunk.js.LICENSE.txt": "/static/js/2.ebbda7aa.chunk.js.LICENSE.txt",
+    "static/media/Why.jpg": "/static/media/Why.318b4f2d.jpg",
+    "static/media/adil.jpeg": "/static/media/adil.a004a7be.jpeg",
+    "static/media/adnanhs.jpeg": "/static/media/adnanhs.52c50614.jpeg",
+    "static/media/aid.png": "/static/media/aid.4dc299bb.png",
+    "static/media/capture9.png": "/static/media/capture9.95bb8f3b.png",
+    "static/media/clients-01.svg": "/static/media/clients-01.60c45c8f.svg",
+    "static/media/clients-02.svg": "/static/media/clients-02.ccd24bd0.svg",
+    "static/media/clients-03.svg": "/static/media/clients-03.333c569a.svg",
+    "static/media/clients-04.svg": "/static/media/clients-04.1e121c92.svg",
+    "static/media/clients-05.svg": "/static/media/clients-05.d09fba01.svg",
+    "static/media/feature-tile-icon-01.svg": "/static/media/feature-tile-icon-01.a1e42224.svg",
+    "static/media/feature-tile-icon-02.svg": "/static/media/feature-tile-icon-02.cbb70dcc.svg",
+    "static/media/feature-tile-icon-03.svg": "/static/media/feature-tile-icon-03.2d03db10.svg",
+    "static/media/george.jpeg": "/static/media/george.cafcdff0.jpeg",
+    "static/media/style.scss": "/static/media/illustration-section-01.ad9b81a8.svg",
+    "static/media/nzenn.png": "/static/media/nzenn.55494ed9.png",
+    "static/media/quant.png": "/static/media/quant.ac83c7a3.png",
+    "static/media/secure.png": "/static/media/secure.c69b7693.png",
+    "static/media/threat.png": "/static/media/threat.ad82885a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09b85ec0.js",
+    "static/js/2.ebbda7aa.chunk.js",
+    "static/css/main.7f808b66.chunk.css",
+    "static/js/main.b57e69cf.chunk.js"
+  ]
+}
