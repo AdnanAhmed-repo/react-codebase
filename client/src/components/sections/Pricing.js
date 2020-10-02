@@ -36,7 +36,7 @@ class Pricing extends React.Component {
         1: ["$", "2000", "/year"]
       },
       plan3: {
-        0: ["$", "249", "/m"],
+        0: ["$", "249", "/month"],
         1: ["$", "2500", "/year"]
       }
     }

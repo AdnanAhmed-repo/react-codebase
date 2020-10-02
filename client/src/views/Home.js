@@ -43,8 +43,8 @@ class Home extends React.Component {
           <SectionHeader data={genericSection01Header} className="reveal-from-bottom" />
           <div className="reveal-from-bottom">
             <a
-              data-video="https://www.youtube.com/watch?v=QyI8fXAiEr4&t=6s"
-              href="#0"
+              data-video="https://youtu.be.com/QyI8fXAiEr4"
+              href="https://youtu.be/QyI8fXAiEr4"
               aria-controls="video-modal"
               onClick={this.openModal}
             >
@@ -59,7 +59,7 @@ class Home extends React.Component {
             id="video-modal"
             show={this.state.videoModalActive}
             handleClose={this.closeModal}
-            video="https://player.vimeo.com/video/174002812"
+            video="https://youtube.com/QyI8fXAiEr4"
             videoTag="iframe" />
         </GenericSection>        
         <FeaturesSplit invertMobile topDivider imageFill />

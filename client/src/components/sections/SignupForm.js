@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
+import { signupUser  } from '../../redux/actions/user_action'
+//import Cards from 'react-credit-cards';
+
+import { connect } from 'react-redux';
+
 
 const propTypes = {
   ...SectionProps.types
@@ -16,7 +21,32 @@ const defaultProps = {
 
 class SignupForm extends React.Component {
 
-  render() {
+  constructor(props){
+    super(props);
+    this.state ={ bname :"Busines Name" ,
+                  email :"Email address",
+                  password : "Password",
+                  name: 'Name on Card',
+                  number:'Card Number',
+                  expiry: 'Date of Expiration',
+                  cvc: 'CVC(3 Digits)',
+                  zipcode:'Zipcode',
+    
+                }
+  }
+
+handlechangeall = (event) =>{
+  this.setState( { [event.target.name] : event.target.value })
+}
+
+  handlesubmit = (event) =>{
+    this.props.signup(this.state)
+    //alert( JSON.stringify(this.state));
+    console.log( JSON.stringify(this.state));
+    event.preventDefault();
+  }
+  
+render() {
 
     const {
       className,
@@ -59,33 +89,122 @@ class SignupForm extends React.Component {
             <div className="tiles-wrap">
               <div className="tiles-item">
                 <div className="tiles-item-inner">
-                  <form>
+                  <form onSubmit = {this.handlesubmit}>
                     <fieldset>
                       <div className="mb-12">
                         <Input
                           label="Business name"
-                          placeholder="Business name" 
+                          type="text"
+                          name = "bname"
+                          value={this.state.bname}
+                          onChange={this.handlechangeall}
                           labelHidden
                           required />
                       </div>
                       <div className="mb-12">
                         <Input
                           type="email"
+                          name="email"
                           label="Email"
-                          placeholder="Email"
+                          value={this.state.email}
+                          onChange={this.handlechangeall}
                           labelHidden
                           required />
                       </div>
                       <div className="mb-12">
                         <Input
                           type="password"
+                          name="password"
                           label="Password"
-                          placeholder="Password"
+                          value={this.state.password}
+                          onChange={this.handlechangeall}
+                          labelHidden
+                          required />
+                          <div className="signin-bottom has-top-divider">
+                    <div className="pt-32 text-xs center-content text-color-low">
+                      Select Subscription tier (to select, use up & down arrow keys):
+                    </div>
+                  </div>
+                      </div>
+                     < div className="radio">
+                    <label>
+                   <input type="radio" value="option1" checked={true} />
+                      ($49/month)
+                    </label>
+                    </div>
+                    <div className="radio">
+                    <label>
+                    <input type="radio" value="option2" />
+                     Basic ($99/month)
+                     </label>
+                    </div>
+                    <div className="radio">
+                    <label>
+                    <input type="radio" value="option3" />
+                    Complete ($249/month)
+                   </label>
+                    </div>
+                    <div className="signin-bottom has-top-divider">
+                    <div className="pt-32 text-xs center-content text-color-low">
+                      Enter Card Details Here!
+                      <div className="mb-12">
+                        <Input
+                          label="Name on the card"
+                          type="text"
+                          name = "name"
+                          value={this.state.name}
+                          onChange={this.handlechangeall}
                           labelHidden
                           required />
                       </div>
+                      <div className="mb-12">
+                        <Input
+                          label="Card Number"
+                          name="number"
+                          type="text"
+                           value={this.state.number}
+                          onChange={this.handlechangeall}
+                          labelHidden
+                          required />
+                      </div>
+                      <div className="mb-12">
+                        <Input
+                          label="Date of Expiration"
+                          type="text"
+                          name = "expiry"
+                          value={this.state.expiry}
+                          onChange={this.handlechangeall}
+                          labelHidden
+                          required />
+                      </div>
+                      <div className="mb-12">
+                        <Input
+                          label="cvc"
+                          type="text"
+                          name = "cvc"
+                          value={this.state.cvc}
+                          onChange={this.handlechangeall}
+                          labelHidden
+                          required />
+                      </div>
+                      <div className="mb-12">
+                        <Input
+                          label="zipcode"
+                          type="text"
+                          name = "zipcode"
+                          value={this.state.zipcode}
+                          onChange={this.handlechangeall}
+                          labelHidden
+                          required />
+                      </div>
+
+                      
+                    </div>
+                  </div>
+
+
                       <div className="mt-24 mb-32">
-                        <Button color="primary" wide>Sign up</Button>
+                        <Button color="primary" wide>Register</Button>
                       </div>
                     </fieldset>
                   </form>
@@ -102,9 +221,20 @@ class SignupForm extends React.Component {
       </section>
     );
   }
-}
-
+  }
 SignupForm.propTypes = propTypes;
 SignupForm.defaultProps = defaultProps;
 
-export default SignupForm;
+const mapStateToProps=state =>({
+
+})
+const mapDispatchToProps=dispatch=>{
+ return{ signup:(data)=>dispatch(signupUser(data))};
+  
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignupForm)
+
+
+
