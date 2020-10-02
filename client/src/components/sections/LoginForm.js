@@ -6,6 +6,9 @@ import SectionHeader from './partials/SectionHeader';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 import Checkbox from '../elements/Checkbox';
+import {  loginUser } from '../../redux/actions/user_action'
+import { connect } from 'react-redux';
+
 
 const propTypes = {
   ...SectionProps.types
@@ -16,6 +19,23 @@ const defaultProps = {
 }
 
 class LoginForm extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state ={ email :"",
+                  password : ""}
+  }
+
+handlechangeall = (event) =>{
+  this.setState( { [event.target.name] : event.target.value })
+}
+
+  handlesubmit = (event) =>{
+    this.props.login(this.state)
+    //alert( JSON.stringify(this.state));
+    console.log( JSON.stringify(this.state));
+    event.preventDefault();
+  }
 
   render() {
 
@@ -60,13 +80,15 @@ class LoginForm extends React.Component {
             <div className="tiles-wrap">
               <div className="tiles-item">
                 <div className="tiles-item-inner">
-                  <form>
+                  <form onSubmit = {this.handlesubmit}>
                     <fieldset>
                       <div className="mb-12">
                         <Input
                           type="email"
                           label="Email"
-                          placeholder="Email"
+                          name="email"
+                          value={this.state.email}
+                          onChange={this.handlechangeall}
                           labelHidden
                           required />
                       </div>
@@ -74,7 +96,9 @@ class LoginForm extends React.Component {
                         <Input
                           type="password"
                           label="Password"
-                          placeholder="Password"
+                          name="password"
+                          value={this.state.password}
+                          onChange={this.handlechangeall}
                           labelHidden
                           required />
                       </div>
@@ -104,5 +128,12 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = propTypes;
 LoginForm.defaultProps = defaultProps;
+const mapStateToProps=state =>({
 
-export default LoginForm;
+})
+const mapDispatchToProps=dispatch=>{
+ return{ login:(data)=>dispatch(loginUser(data))};
+  
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LoginForm)
