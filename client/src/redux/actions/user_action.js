@@ -18,7 +18,7 @@ export function signupUser(dataToSubmit, id) {
 
 export function loginUser(dataToSubmit) {
 	const request = axios
-		.post(`http://localhost:5000/api/users/register/login`, dataToSubmit)
+		.post(`http://localhost:5000/api/users/login`, dataToSubmit)
 		.then((response) => response.data);
 	console.log("------------action is connected all fine");
 	return {

@@ -16,7 +16,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { connect } from "react-redux";
 const stripePromise = loadStripe(
-	"pk_live_51HSZgBEFjB8SbJCIEaRbjphURYkZeGbM0brbf1Iyhex0q9d7rG1khptf2IuzES2bHFuK4z2ORCB3DD5E07HxGbrx00vszVWrVR"
+	"pk_test_51HSZgBEFjB8SbJCIFgtfGOiKPpfxZkfiP8XSWtMURIFW4PMY5T8kSm73sYY2nfb7yX8pykYhzFoDNGL8lkt3I8HV00giIcuVL4"
 );
 const propTypes = {
 	...SectionProps.types,

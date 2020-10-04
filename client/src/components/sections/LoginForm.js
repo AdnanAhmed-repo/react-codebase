@@ -31,12 +31,13 @@ class LoginForm extends React.Component {
 		event.preventDefault();
 
 		this.props.login(this.state);
-		this.props.history.push("/dashboard");
+		this.props.props.history.push("/dashboard");
 		//alert( JSON.stringify(this.state));
 		console.log(JSON.stringify(this.state));
 	};
 
 	render() {
+		console.log("PROPS IN LOGINFORM _____", this.props);
 		const {
 			className,
 			topOuterDivider,
@@ -84,6 +85,7 @@ class LoginForm extends React.Component {
 											<div className="mb-12">
 												<Input
 													type="email"
+													placeholder="Your E-mail"
 													label="Email"
 													name="email"
 													value={this.state.email}
@@ -95,6 +97,7 @@ class LoginForm extends React.Component {
 											<div className="mb-12">
 												<Input
 													type="password"
+													placeholder="Your Password"
 													label="Password"
 													name="password"
 													value={this.state.password}
