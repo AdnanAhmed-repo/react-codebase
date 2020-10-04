@@ -71,7 +71,7 @@ const StripeForm = (aprops) => {
 			const { id } = paymentMethod;
 			console.log("111111111 and ID_", id);
 			aprops.signup(state, id);
-			aprops.history.push("/dashboard");
+			aprops.props.history.push("/dashboard");
 			console.log("3333333333");
 			// setState({ ...state, stripeId: id });
 		}

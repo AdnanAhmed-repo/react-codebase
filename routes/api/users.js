@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
 const stripe = require("stripe")(
-	"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"
+	"sk_test_51HSZgBEFjB8SbJCIS5Ss6DbZ2NCXxWyMimNms7eEPUdZvom5Ld0bzHHGSwhCojPsNVo1Nmwd729di3EcsfQf88oD00bBkRStmg"
 );
 
 const User = require("../../models/User");
