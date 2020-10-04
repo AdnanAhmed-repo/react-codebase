@@ -59,7 +59,7 @@ export default function ClippedDrawer() {
 							height="40px"
 							style={{ marginRight: "16px" }}
 						/>
-						<Typography variant="h4">Welcome to Network Zen</Typography>
+						<Typography variant="h4">Welcome to NetworkZen</Typography>
 					</Typography>
 				</Toolbar>
 			</AppBar>
