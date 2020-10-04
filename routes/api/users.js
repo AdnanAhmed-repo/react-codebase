@@ -5,7 +5,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(
+	"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"
+);
 
 const User = require("../../models/User");
 // @route POST api/users
@@ -26,8 +28,8 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { bname, email, password } = req.body;
-
+		const { bname, email, password, amount, stripeId, plan } = req.body;
+		console.log("WE ARe INSIDE BACKEND NOW");
 		try {
 			// checking email already exist or not
 			let user = await User.findOne({ email });
@@ -41,44 +43,32 @@ router.post(
 			// Stripe Integration=======================================
 			// Stripe Integration=======================================
 
-			const { product, token } = req.body;
-
 			//unique key to save the users from overcharging on accidental double clicks
 			const uniqueKey = Math.random() * 1000000;
-
-			const stripeDetails = stripe.customers
-				.create({
-					email: token.email,
-					source: token.id,
-				})
-				.then((customer) => {
-					stripe.charges.create(
-						{
-							amount: product.price * 100,
-							currency: "usd",
-							customer: customer.id,
-							receipt_email: token.email,
-							description: `purchasing ${product.name}`,
-							shipping: {
-								name: token.card.name,
-								address: {
-									country: token.card.address_country,
-								},
-							},
-						},
-						{ uniqueKey }
-					);
-				});
+			const payment = await stripe.paymentIntents.create({
+				amount,
+				currency: "USD",
+				description: plan,
+				payment_method: stripeId,
+				confirm: true,
+			});
+			console.log("BACKEND PAYMENT___++++", payment);
 
 			// =======================================Stripe Integration
 			// =======================================Stripe Integration
-
+			const stripeDetails = {
+				amount,
+				plan,
+				stripeId,
+			};
 			// creating new user body
 			user = new User({
 				bname,
 				email,
 				password,
 				stripeDetails,
+
+				// stripeDetails,
 			});
 
 			// hashing password
@@ -104,8 +94,8 @@ router.post(
 
 			// assigning token
 			user.token = token;
-			await user.save();
-
+			const registeredUser = await user.save();
+			console.log("registered user-----", registeredUser);
 			res
 				.header("x-auth-token", token)
 				.json({ registerSuccess: true, token, bname: user.bname });
