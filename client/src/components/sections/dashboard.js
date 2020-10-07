@@ -10,6 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import {Link} from 'react-router-dom';
 import {
 	DashboardTwoTone,
 	AssignmentIndTwoTone,
@@ -17,7 +18,7 @@ import {
 	SubjectTwoTone,
 	ContactSupportTwoTone,
 } from "@material-ui/icons";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/nzenn.png";
 
 const drawerWidth = 240;
 
@@ -50,16 +51,19 @@ export default function ClippedDrawer() {
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
-			<AppBar position="fixed" className={classes.appBar}>
+			<AppBar position="fixed" className={classes.appBar} style={{ background: '#000000' }}>
 				<Toolbar>
 					<Typography variant="h6" noWrap>
+					<Link to="/">
 						<img
 							src={logo}
 							alt="logo"
-							height="40px"
+							height="5%"
+							width="200px"
 							style={{ marginRight: "16px" }}
+							
 						/>
-						<Typography variant="h4">Welcome to NetworkZen</Typography>
+						</Link>
 					</Typography>
 				</Toolbar>
 			</AppBar>

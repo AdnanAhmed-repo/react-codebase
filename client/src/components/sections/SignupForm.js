@@ -108,6 +108,7 @@ const StripeForm = (aprops) => {
 												label="Business name"
 												type="text"
 												name="bname"
+												
 												value={state.bname}
 												onChange={handlechangeall}
 												labelHidden
@@ -140,8 +141,7 @@ const StripeForm = (aprops) => {
 										{/* Stripe Integration */}
 										<div className="signin-bottom has-top-divider">
 											<div className="pt-32 text-xs center-content text-color-low">
-												Select Subscription tier (to select, use up & down arrow
-												keys):
+												Select Subscription tier:
 											</div>
 										</div>
 
@@ -188,6 +188,7 @@ const StripeForm = (aprops) => {
 											<div className="mb-12">
 												<Input
 													label="Name on the card"
+
 													type="text"
 													name="name"
 													value={state.name}
