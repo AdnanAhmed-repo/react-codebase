@@ -14,16 +14,8 @@ import Secondary from "./views/Secondary";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import dashboard from "./views/dashboard";
-import DashHome from "./views/dashhome";
+// import DashHome from "./views/dashhome";
 import DashConfig from "./views/dashconfig";
-import DashProfile from "./views/dashprofile";
-import DashHelp from "./views/dashhelp";
-import DashFAQS from "./views/dashfaqs";
-
-
-
-
-
 
 class App extends React.Component {
 	componentDidMount() {
@@ -64,11 +56,11 @@ class App extends React.Component {
 							layout={LayoutSignin}
 						/>
 						<AppRoute exact path="/dashboard" component={dashboard} />
-						<AppRoute exact path="/dashhome" exact component={DashHome} />
-						<AppRoute exact path="/dashhelp" exact component={DashHelp} />
-						<AppRoute exact path="/dashconfig" exact component={DashConfig} />
-						<AppRoute exact path="/dashsettings" exact component={DashProfile} />
-						<AppRoute exact path="/dashfaqs" exact component={DashFAQS} />
+						<AppRoute
+							exact
+							path="/dashboard/configure"
+							component={DashConfig}
+						/>
 					</Switch>
 				)}
 			/>

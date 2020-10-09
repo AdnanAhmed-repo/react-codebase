@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -10,7 +11,8 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import {Link} from 'react-router-dom';
+// import DashHome from "./DashHome"
+import { Link } from "react-router-dom";
 import {
 	DashboardTwoTone,
 	AssignmentIndTwoTone,
@@ -45,24 +47,28 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function ClippedDrawer() {
+const ClippedDrawer = (props) => {
+	console.log("USER IN DASHBOARD_____", props.user);
 	const classes = useStyles();
 
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
-			<AppBar position="fixed" className={classes.appBar} style={{ background: '#000000' }}>
+			<AppBar
+				position="fixed"
+				className={classes.appBar}
+				style={{ background: "#000000" }}
+			>
 				<Toolbar>
 					<Typography variant="h6" noWrap>
-					<Link to="/">
-						<img
-							src={logo}
-							alt="logo"
-							height="5%"
-							width="200px"
-							style={{ marginRight: "16px" }}
-							
-						/>
+						<Link to="/">
+							<img
+								src={logo}
+								alt="logo"
+								height="5%"
+								width="200px"
+								style={{ marginRight: "16px" }}
+							/>
 						</Link>
 					</Typography>
 				</Toolbar>
@@ -81,7 +87,9 @@ export default function ClippedDrawer() {
 							<ListItemIcon>
 								<DashboardTwoTone />
 							</ListItemIcon>
-							<ListItemText primary="Dashboard" />
+							<Link to="/dashboard/dashhome">
+								<ListItemText primary="Dashboard" />
+							</Link>
 						</ListItem>
 						<Divider />
 						Interface
@@ -89,7 +97,9 @@ export default function ClippedDrawer() {
 							<ListItemIcon>
 								<AssignmentIndTwoTone />
 							</ListItemIcon>
-							<ListItemText primary="Configure" />
+							<Link to="/dashboard/configure">
+								<ListItemText primary="Configure" />
+							</Link>
 						</ListItem>
 						<ListItem button>
 							<ListItemIcon>
@@ -149,4 +159,16 @@ export default function ClippedDrawer() {
 			</main>
 		</div>
 	);
-}
+};
+
+const mapStateToProps = (state) => {
+	return {
+		user: state.user,
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {};
+	// return { signup: (data, id) => dispatch(signupUser(data, id)) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClippedDrawer);

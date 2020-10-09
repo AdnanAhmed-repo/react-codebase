@@ -98,7 +98,12 @@ router.post(
 			console.log("registered user-----", registeredUser);
 			res
 				.header("x-auth-token", token)
-				.json({ registerSuccess: true, token, bname: user.bname });
+				.json({
+					registerSuccess: true,
+					id: registeredUser.id,
+					token,
+					bname: user.bname,
+				});
 		} catch (err) {
 			console.log(err.message);
 			res.status(500).send("Server error");
@@ -146,6 +151,7 @@ router.post(
 			}
 
 			// payload for signing jwt token
+			console.log("USER__ID______", user.id);
 			const payload = {
 				user: {
 					id: user.id,
@@ -167,7 +173,7 @@ router.post(
 
 			res
 				.header("x-auth-token", token)
-				.json({ loginSuccess: true, token, bname: user.bname });
+				.json({ loginSuccess: true, id: user.id, token, bname: user.bname });
 		} catch (err) {
 			console.log(err.message);
 			res.status(500).send("Server error");
