@@ -55,12 +55,12 @@ class App extends React.Component {
 							component={Signup}
 							layout={LayoutSignin}
 						/>
-						<AppRoute exact path="/dashboard" component={dashboard} />
-						<AppRoute
+						<AppRoute path="/dashboard" component={dashboard} />
+						{/* <AppRoute
 							exact
 							path="/dashboard/configure"
 							component={DashConfig}
-						/>
+						/> */}
 					</Switch>
 				)}
 			/>
