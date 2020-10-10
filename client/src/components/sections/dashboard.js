@@ -11,6 +11,14 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import "./dashboard.css"
+import { Switch } from "react-router-dom";
+import AppRoute from "../../utils/AppRoute";
+import DashHome from "./DashHome";
+import DashConfig from "../../views/dashconfig";
+import DashProfile from "../../views/dashprofile";
+import DashHelp from "../../views/dashhelp";
+import DashFAQS from "../../views/dashfaqs";
 // import DashHome from "./DashHome"
 import { Link } from "react-router-dom";
 import {
@@ -52,111 +60,87 @@ const ClippedDrawer = (props) => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
-			<CssBaseline />
-			<AppBar
-				position="fixed"
-				className={classes.appBar}
-				style={{ background: "#000000" }}
-			>
-				<Toolbar>
-					<Typography variant="h6" noWrap>
-						<Link to="/">
-							<img
-								src={logo}
-								alt="logo"
-								height="5%"
-								width="200px"
-								style={{ marginRight: "16px" }}
-							/>
-						</Link>
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				className={classes.drawer}
-				variant="permanent"
-				classes={{
-					paper: classes.drawerPaper,
-				}}
-			>
-				<Toolbar />
+		<div className="main_dashboard">
+			
+			<div className="main_navbar">
+				<Link to="/">
+					<img src={logo}	alt="logo" height="5%" width="200px" style={{ margin: "0 16px" }}/>
+				</Link>
+			</div>
+			<div className="dashboard_body">
+				<div className="sidebar">
 				<div className={classes.drawerContainer}>
-					<List>
-						<ListItem button>
-							<ListItemIcon>
-								<DashboardTwoTone />
-							</ListItemIcon>
-							<Link to="/dashboard/dashhome">
-								<ListItemText primary="Dashboard" />
-							</Link>
-						</ListItem>
-						<Divider />
-						Interface
-						<ListItem button>
-							<ListItemIcon>
-								<AssignmentIndTwoTone />
-							</ListItemIcon>
-							<Link to="/dashboard/configure">
-								<ListItemText primary="Configure" />
-							</Link>
-						</ListItem>
-						<ListItem button>
-							<ListItemIcon>
-								<SettingsTwoTone />
-							</ListItemIcon>
-							<ListItemText primary="Settings" />
-						</ListItem>
-						<Divider />
-						Help
-						<ListItem button>
-							<ListItemIcon>
-								<SubjectTwoTone />
-							</ListItemIcon>
-							<ListItemText primary="Customer Support" />
-						</ListItem>
-						<ListItem button>
-							<ListItemIcon>
-								<ContactSupportTwoTone />
-							</ListItemIcon>
-							<ListItemText primary="FAQ" />
-						</ListItem>
-					</List>
+				<List>
+					<ListItem button>
+						<ListItemIcon>
+							<DashboardTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/home">
+							<ListItemText className="link_text" primary="Dashboard" />
+						</Link>
+					</ListItem>
 					<Divider />
+					Interface
+					<ListItem button>
+						<ListItemIcon>
+							<AssignmentIndTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/configure">
+							<ListItemText className="link_text" primary="Configure" />
+						</Link>
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<SettingsTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/settings">
+
+						<ListItemText className="link_text" primary="Settings" />
+						</Link>
+
+					</ListItem>
+					<Divider />
+					Help
+					<ListItem button>
+						<ListItemIcon>
+							<SubjectTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/help">
+						<ListItemText className="link_text" primary="Help" />
+						</Link>
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<ContactSupportTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/faqs">
+						<ListItemText className="link_text" primary="FAQ" />
+						</Link>
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<ContactSupportTwoTone />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/">
+						<ListItemText className="link_text" primary="Logout" />
+						</Link>
+					</ListItem>
+				</List>
+				<Divider />
+			</div>
 				</div>
-			</Drawer>
-			<main className={classes.content}>
-				<Toolbar />
-				<Typography paragraph>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-					dolor purus non enim praesent elementum facilisis leo vel. Risus at
-					ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-					quisque non tellus. Convallis convallis tellus id interdum velit
-					laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-					adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-					integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-					eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-					quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-					vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-					lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-					faucibus et molestie ac.
-				</Typography>
-				<Typography paragraph>
-					Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-					ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-					elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-					sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-					mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-					risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-					purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-					tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-					morbi tristique senectus et. Adipiscing elit duis tristique
-					sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-					eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-					posuere sollicitudin aliquam ultrices sagittis orci a.
-				</Typography>
-			</main>
+
+				<div className="pages">
+					<Switch>
+						<AppRoute exact path="/dashboard/home" component={DashHome} />
+						<AppRoute exact path="/dashboard/help" component={DashHelp} />
+						<AppRoute exact path="/dashboard/configure" component={DashConfig} />
+						<AppRoute exact path="/dashboard/settings" component={DashProfile} />
+						<AppRoute exact path="/dashboard/faqs" component={DashFAQS} />
+					</Switch>
+				</div>
+			</div>
+			
 		</div>
 	);
 };
@@ -172,3 +156,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClippedDrawer);
+
+

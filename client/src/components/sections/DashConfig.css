@@ -1,6 +1,7 @@
 .configure {
+	width: 100%;
 	padding: 10px;
-	margin: 50px;
+	margin: 10px;
 	background-color: rgb(187, 187, 187);
 }
 .urls_table,
