@@ -6,6 +6,7 @@ import {
 	ADD_CONFIG,
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
+	USER_PROFILE,
 } from "../actions/actiontype";
 
 export const UserReducer = (state = {user:{}, config:{} }, action) => {
@@ -27,7 +28,9 @@ export const UserReducer = (state = {user:{}, config:{} }, action) => {
 			return { ...state, userData: action.payload };
 		case LOGOUT_USER:
 			return { ...state };
-		default:
-			return state;
+		case USER_PROFILE:
+			return { ...state, userProfile: action.payload };
+           default:
+        return state;
 	}
 };

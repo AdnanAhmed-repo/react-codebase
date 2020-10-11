@@ -1,0 +1,27 @@
+.container{
+    margin-top:15px;
+}
+ 
+
+.form{
+    padding:20px; 
+    border:10px solid rgb(187, 187, 187); 
+    background-color: rgb(236, 236, 236);}
+
+.myprofile{ 
+    font-size: 24px;
+	margin: 10px auto;
+	text-align: center;
+    color: black;
+    
+}
+
+.input{ 
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px;
+    padding: 0;
+    color: rgb(187, 187, 187);
+    position: relative;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
