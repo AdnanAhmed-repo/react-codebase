@@ -156,7 +156,7 @@ const StripeForm = (aprops) => {
 														value="49"
 														name="plan"
 													/>
-													Lite ($49/month)
+													Lite   ($49/month)
 												</label>
 											</div>
 											<div>
