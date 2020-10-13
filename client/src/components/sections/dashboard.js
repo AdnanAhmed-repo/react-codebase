@@ -19,6 +19,7 @@ import DashConfig from "../../views/dashconfig";
 import DashProfile from "../../views/dashprofile";
 import DashHelp from "../../views/dashhelp";
 import DashFAQS from "../../views/dashfaqs";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import DashHome from "./DashHome"
 import { Link } from "react-router-dom";
 import {
@@ -83,7 +84,8 @@ const ClippedDrawer = (props) => {
 					Interface
 					<ListItem button>
 						<ListItemIcon>
-							<AssignmentIndTwoTone />
+						<SettingsTwoTone />
+							
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/configure">
 							<ListItemText className="link_text" primary="Configure" />
@@ -91,7 +93,7 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-							<SettingsTwoTone />
+						<AssignmentIndTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/settings">
 
@@ -103,7 +105,8 @@ const ClippedDrawer = (props) => {
 					Help
 					<ListItem button>
 						<ListItemIcon>
-							<SubjectTwoTone />
+						<ContactSupportTwoTone />
+
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/help">
 						<ListItemText className="link_text" primary="Help" />
@@ -111,22 +114,24 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-							<ContactSupportTwoTone />
+						<SubjectTwoTone />
+
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/faqs">
 						<ListItemText className="link_text" primary="FAQ" />
 						</Link>
 					</ListItem>
+					<Divider />
+
 					<ListItem button>
 						<ListItemIcon>
-							<ContactSupportTwoTone />
+							<ExitToAppIcon />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/">
 						<ListItemText className="link_text" primary="Logout" />
 						</Link>
 					</ListItem>
 				</List>
-				<Divider />
 			</div>
 				</div>
 
