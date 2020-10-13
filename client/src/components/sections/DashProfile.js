@@ -49,7 +49,7 @@ const DashProfile = (props)=>{
               <br/>
               <Form.Group as={Row} className="input">
               <Form.Label>
-                Subscription :  
+                Subscription Tier :  
                 </Form.Label>
                 <br/>
               <br/> 
@@ -57,10 +57,14 @@ const DashProfile = (props)=>{
               type="text" 
               defaultValue={props.profile.message.stripeDetails.plan} />
               </Form.Group>
-              </Form></>}
+                  </Form></>}
+              
+             
+
               </Col>
-  
+              
          </Row>
+        
           </Container>
       )
       }
