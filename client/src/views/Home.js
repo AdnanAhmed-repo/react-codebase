@@ -37,7 +37,7 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <HeroFull className="illustration-section-01" />
-        <Clients topDivider bottomDivider />
+    {/*<Clients topDivider bottomDivider />*/}
         <FeaturesTiles />
         <GenericSection topDivider className="center-content">
           <SectionHeader data={genericSection01Header} className="reveal-from-bottom" />
