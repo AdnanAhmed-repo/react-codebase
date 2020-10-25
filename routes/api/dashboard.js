@@ -58,7 +58,7 @@ router.post("/risk-score", async (req, res) => {
             user.riskScore = Math.floor((ipRisk + urlRisk + emailRisk)/3)
             await user.save()
         }
-		// collecting user's all config details and sending
+		// collecting user's allconfig details and sending
 		// let userDevices = await Device.find({ user: userId });
         
 		res.status(200).json({ success: true, risk:user.riskScore});
