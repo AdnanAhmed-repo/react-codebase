@@ -1,25 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import "./dashboard.css"
 import { Switch } from "react-router-dom";
-import AppRoute from "../../utils/AppRoute";
+import ProtectedRoute from "../../utils/ProtectedRoutes";
 import DashHome from "./DashHome";
 import DashConfig from "../../views/dashconfig";
 import DashProfile from "../../views/dashprofile";
 import DashHelp from "../../views/dashhelp";
 import DashFAQS from "../../views/dashfaqs";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import DashHome from "./DashHome"
 import { Link } from "react-router-dom";
 import {
@@ -57,9 +51,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ClippedDrawer = (props) => {
-	console.log("USER IN DASHBOARD_____", props.user);
 	const classes = useStyles();
 
+	
+	const handleLogout=()=>{
+		localStorage.clear()
+	}
 	return (
 		<div className="main_dashboard">
 			
@@ -84,8 +81,7 @@ const ClippedDrawer = (props) => {
 					Interface
 					<ListItem button>
 						<ListItemIcon>
-						<SettingsTwoTone />
-							
+							<AssignmentIndTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/configure">
 							<ListItemText className="link_text" primary="Configure" />
@@ -93,7 +89,7 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-						<AssignmentIndTwoTone />
+							<SettingsTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/settings">
 
@@ -105,8 +101,7 @@ const ClippedDrawer = (props) => {
 					Help
 					<ListItem button>
 						<ListItemIcon>
-						<ContactSupportTwoTone />
-
+							<SubjectTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/help">
 						<ListItemText className="link_text" primary="Help" />
@@ -114,34 +109,32 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-						<SubjectTwoTone />
-
+							<ContactSupportTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/faqs">
 						<ListItemText className="link_text" primary="FAQ" />
 						</Link>
 					</ListItem>
-					<Divider />
-
 					<ListItem button>
 						<ListItemIcon>
-							<ExitToAppIcon />
+							<ContactSupportTwoTone />
 						</ListItemIcon>
-						<Link className="sidebar_links" to="/">
+						<Link onClick={handleLogout} className="sidebar_links" to="/">
 						<ListItemText className="link_text" primary="Logout" />
 						</Link>
 					</ListItem>
 				</List>
+				<Divider />
 			</div>
 				</div>
 
 				<div className="pages">
 					<Switch>
-						<AppRoute exact path="/dashboard/home" component={DashHome} />
-						<AppRoute exact path="/dashboard/help" component={DashHelp} />
-						<AppRoute exact path="/dashboard/configure" component={DashConfig} />
-						<AppRoute exact path="/dashboard/settings" component={DashProfile} />
-						<AppRoute exact path="/dashboard/faqs" component={DashFAQS} />
+						<ProtectedRoute exact path="/dashboard/home" component={DashHome} />
+						<ProtectedRoute exact path="/dashboard/help" component={DashHelp} />
+						<ProtectedRoute exact path="/dashboard/configure" component={DashConfig} />
+						<ProtectedRoute exact path="/dashboard/settings" component={DashProfile} />
+						<ProtectedRoute exact path="/dashboard/faqs" component={DashFAQS} />
 					</Switch>
 				</div>
 			</div>

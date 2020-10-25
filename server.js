@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const path = require("path");
 const cors = require("cors");
+require('dotenv').config()
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended:true}))
 //Define routes
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/config", require("./routes/api/config"));
+app.use("/api/dashboard", require("./routes/api/dashboard"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/profile", require("./routes/api/profile"));
 

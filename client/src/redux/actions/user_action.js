@@ -1,12 +1,33 @@
 import axios from "axios";
 import {
 	FETCH_CONFIG,
+	FETCH_RISK,
 	ADD_CONFIG,
 	AUTH_USER,
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
 	USER_PROFILE,
 } from "./actiontype";
+
+export const fetchRisk=(risk)=>{
+	return {
+		type: FETCH_RISK,
+		payload: risk
+	}
+}
+export const fetchAllRisk=(id)=>{
+	return(dispatch)=>{
+		console.log("fetching Risk........with::", id)
+		axios.post(`http://localhost:5000/api/dashboard/risk-score`, {userId:id})
+		.then((response)=>{
+			const risk = response.data
+			console.log("RISK AFTER FETCHING___", risk)
+			dispatch(fetchRisk(risk));
+		}).catch(err=>{
+			console.log("ERROR IN FETCHING RISK ALL!!!!!", err)
+		})
+	}
+}
 
 export const fetchConfig=(config)=>{
 	return {
@@ -73,9 +94,11 @@ export const addEmailConfig=(data)=>{
 
 
 export const userSuccess = (user) => {
+	localStorage.setItem('user', JSON.stringify(user))
+	const userData = JSON.parse(localStorage.getItem('user'))
 	return {
 		type: LOGIN_SUCCESS,
-		payload: user,
+		payload: userData,
 	};
 };
 

@@ -55,7 +55,7 @@ function DashConfig(props) {
 		<div className="configure">
 			<div className="urls_table">
 				<div className="table_header">
-					<h2>URLs And IP Addresses</h2>
+					<h2>Urls And IP Addresses</h2>
 					<button onClick={handleAddSubmit} name="addUrl">+ Add</button>
 				</div>
 				{props.config.userUrls&&props.config.userUrls.length?<div className="allUrls">	
@@ -68,16 +68,16 @@ function DashConfig(props) {
 			{/* devices table */}
 			<div className="devices_table">
 				<div className="table_header">
-					<h2>Devices, Appliances, and Equipment</h2>
+					<h2>Devices, Appliances and Equipments</h2>
 					<button onClick={handleAddSubmit} name="addDevice">+ Add</button>
 				</div>
 				<div className="allUrls">
 					<div className="devices_headings">
 						<p className="p1">Device Name & Type</p>
-						<p className="p2">Encryption</p>
-						<p className="p3">IP Address</p>
-						<p className="p4">MAC Address</p>
-						<p className="p5">Passwords/SSID</p>
+						<p className="p2">Ports</p>
+						<p className="p3">Ip Address</p>
+						<p className="p4">Mac Address</p>
+						<p className="p5">Passwords</p>
 					</div>
 					{props.config.userDevices&&props.config.userDevices.length?	
 					props.config.userDevices.map(u=>{
@@ -94,9 +94,9 @@ function DashConfig(props) {
 				</div>
 				<div className="devices_items">
 					<input onChange={deviceInputHandler} value={addDevice.data.deviceName} name="deviceName" type="text" placeholder="Device Name & Type" />
-					<input onChange={deviceInputHandler} value={addDevice.data.port} name="port" type="text" placeholder="Enter Encryption Type" />
-					<input onChange={deviceInputHandler} value={addDevice.data.ipAddress} name="ipAddress" type="text" placeholder="Enter IP Address" />
-					<input onChange={deviceInputHandler} value={addDevice.data.macAddress} name="macAddress" type="text" placeholder="Enter MAC Address" />
+					<input onChange={deviceInputHandler} value={addDevice.data.port} name="port" type="text" placeholder="Enter port" />
+					<input onChange={deviceInputHandler} value={addDevice.data.ipAddress} name="ipAddress" type="text" placeholder="Enter Ip Address" />
+					<input onChange={deviceInputHandler} value={addDevice.data.macAddress} name="macAddress" type="text" placeholder="Enter Mac Address" />
 					<input onChange={deviceInputHandler} value={addDevice.data.password} name="password" type="text" placeholder="Enter password" />
 				</div>
 			</div>
@@ -118,7 +118,7 @@ function DashConfig(props) {
 const mapStateToProps=(state)=>{
 	return {
 		config: state.config,
-		userId: state.user.id
+		userId: JSON.parse(localStorage.getItem('user')).id
 	}
 }
 
@@ -133,3 +133,4 @@ const mapDispatchToProps=(dispatch)=>{
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(DashConfig);
+

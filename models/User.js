@@ -15,9 +15,15 @@ const UserSchema = Schema({
 		type: String,
 		required: true,
 	},
-
+	riskScore:{
+		type: Number,
+		default: 100
+	},
 	stripeDetails: {},
-
+	lastActive:{
+		type: Number,
+		default:0
+	},
 	token: {
 		type: String,
 		default: null,
