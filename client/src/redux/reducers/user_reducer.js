@@ -6,10 +6,12 @@ import {
 	ADD_CONFIG,
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
+	FETCH_RISK,
 	USER_PROFILE,
+
 } from "../actions/actiontype";
 
-export const UserReducer = (state = {user:{}, config:{} }, action) => {
+export const UserReducer = (state = {user:{}, config:{}, risk:"Scanning..." }, action) => {
 	switch (action.type) {
 		case SIGNUP_USER:
 			return { ...state, signup: action.payload };
@@ -24,6 +26,9 @@ export const UserReducer = (state = {user:{}, config:{} }, action) => {
 		case FETCH_CONFIG:
 			console.log("FETCHED CONFIG IN REDUCER", action.payload)
 			return {...state, config:action.payload}
+		case FETCH_RISK:
+			console.log("FETCHED RISK IN REDUCER", action.payload)
+			return {...state, risk:action.payload.risk}
 		case AUTH_USER:
 			return { ...state, userData: action.payload };
 		case LOGOUT_USER:
