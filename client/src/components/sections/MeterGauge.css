@@ -1,0 +1,58 @@
+.risk_container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.metergauge_container {
+	height: 100px;
+	width: 200px;
+	position: relative;
+	overflow: hidden;
+}
+.metergauge {
+	position: absolute;
+	height: 200%;
+	width: 100%;
+	border-radius: 50%;
+	background-image: linear-gradient(
+		90deg,
+		rgba(255, 0, 0, 1) 0%,
+		rgba(255, 82, 0, 1) 11%,
+		rgba(254, 209, 0, 1) 27%,
+		rgba(254, 255, 0, 1) 41%,
+		rgba(249, 255, 0, 1) 55%,
+		rgba(233, 255, 0, 1) 66%,
+		rgba(92, 255, 0, 1) 88%,
+		rgba(31, 255, 0, 1) 100%
+	);
+}
+.metergauge_cover {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	height: calc(200% - 60px);
+	width: calc(100% - 60px);
+	border-radius: 50%;
+	background-color: rgb(236, 236, 236);
+}
+.needle {
+	position: absolute;
+	left: calc(50% - 5px);
+	width: 10px;
+	bottom: 5px;
+	height: 90%;
+	transform-origin: 50% 100%;
+	clip-path: polygon(50% 0, 100% 93%, 50% 100%, 0 92%);
+	background-color: black;
+	transition-duration: 2s;
+}
+.meter_reading {
+	margin-bottom: -8px;
+	padding: 0 5px;
+}
+.meter_reading_0 {
+	margin-bottom: -8px;
+	padding: 0 5px;
+	margin-left: 20px;
+}

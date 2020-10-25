@@ -1,6 +1,7 @@
 import React from "react";
-import { withRouter, Switch } from "react-router-dom";
+import { withRouter, Switch, Redirect } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
+import ProtectedRoute from "./utils/ProtectedRoutes";
 import ScrollReveal from "./utils/ScrollReveal";
 
 // Layouts
@@ -15,7 +16,6 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import dashboard from "./views/dashboard";
 // import DashHome from "./views/dashhome";
-import DashConfig from "./views/dashconfig";
 
 class App extends React.Component {
 	componentDidMount() {
@@ -55,12 +55,8 @@ class App extends React.Component {
 							component={Signup}
 							layout={LayoutSignin}
 						/>
-						<AppRoute path="/dashboard" component={dashboard} />
-						{/* <AppRoute
-							exact
-							path="/dashboard/configure"
-							component={DashConfig}
-						/> */}
+						<ProtectedRoute path="/dashboard/home" component={dashboard} />
+						<Redirect to='/login'/>
 					</Switch>
 				)}
 			/>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import SectionHeader from "./partials/SectionHeader";
@@ -49,6 +49,12 @@ const StripeForm = (aprops) => {
 		title: "Welcome. We exist to make cybersecurity easier.",
 	};
 
+	useEffect(()=>{
+		if(localStorage.getItem('user')){
+			aprops.props.history.push("/dashboard/home");
+		}
+	}, [localStorage.getItem('user'), aprops.user])
+
 	const handlechangeall = (event) => {
 		setState({ ...state, [event.target.name]: event.target.value });
 	};
@@ -71,7 +77,6 @@ const StripeForm = (aprops) => {
 			const { id } = paymentMethod;
 			console.log("111111111 and ID_", id);
 			aprops.signup(state, id);
-			aprops.props.history.push("/dashboard");
 			console.log("3333333333");
 			// setState({ ...state, stripeId: id });
 		}
@@ -244,7 +249,11 @@ const StripeForm = (aprops) => {
 // SignupForm.propTypes = propTypes;
 // SignupForm.defaultProps = defaultProps;
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	}
+};
 const mapDispatchToProps = (dispatch) => {
 	return { signup: (data, id) => dispatch(signupUser(data, id)) };
 };

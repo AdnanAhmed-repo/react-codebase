@@ -118,7 +118,7 @@ function DashConfig(props) {
 const mapStateToProps=(state)=>{
 	return {
 		config: state.config,
-		userId: state.user.id
+		userId: JSON.parse(localStorage.getItem('user')).id
 	}
 }
 

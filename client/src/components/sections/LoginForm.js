@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import { Link } from "react-router-dom";
@@ -17,27 +17,32 @@ const defaultProps = {
 	...SectionProps.defaults,
 };
 
-class LoginForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { email: "", password: "" };
-	}
+const LoginForm =(aprops)=> {
+	const [state, setState] = useState({ email: "", password: "" })
 
-	handlechangeall = (event) => {
-		this.setState({ [event.target.name]: event.target.value });
+	useEffect(()=>{
+		console.log("ENtERING LOGIN FORM....",localStorage.getItem('user'))
+		if(localStorage.getItem('user')){
+			aprops.props.history.push("/dashboard/home");
+
+		}
+		
+	},[localStorage.getItem('user'), aprops.user])
+
+	const handlechangeall = (event) => {
+		setState({...state, [event.target.name]: event.target.value });
 	};
 
-	handlesubmit = (event) => {
+	const handlesubmit = (event) => {
 		event.preventDefault();
 
-		this.props.login(this.state);
-		this.props.props.history.push("/dashboard");
-		//alert( JSON.stringify(this.state));
-		console.log(JSON.stringify(this.state));
+		aprops.login(state);
+
+		//alert( JSON.stringify(state));
+		console.log(JSON.stringify(state));
 	};
 
-	render() {
-		console.log("PROPS IN LOGINFORM _____", this.props);
+		console.log("PROPS IN LOGINFORM _____", aprops);
 		const {
 			className,
 			topOuterDivider,
@@ -47,7 +52,7 @@ class LoginForm extends React.Component {
 			hasBgColor,
 			invertColor,
 			...props
-		} = this.props;
+		} = aprops;
 
 		const outerClasses = classNames(
 			"signin section",
@@ -70,6 +75,7 @@ class LoginForm extends React.Component {
 
 		return (
 			<section {...props} className={outerClasses}>
+				{console.log("LOGIN FORM RUNNING.......")}
 				<div className="container">
 					<div className={innerClasses}>
 						<SectionHeader
@@ -80,7 +86,7 @@ class LoginForm extends React.Component {
 						<div className="tiles-wrap">
 							<div className="tiles-item">
 								<div className="tiles-item-inner">
-									<form onSubmit={this.handlesubmit}>
+									<form onSubmit={handlesubmit}>
 										<fieldset>
 											<div className="mb-12">
 												<Input
@@ -88,8 +94,8 @@ class LoginForm extends React.Component {
 													placeholder="Your E-mail"
 													label="Email"
 													name="email"
-													value={this.state.email}
-													onChange={this.handlechangeall}
+													value={state.email}
+													onChange={handlechangeall}
 													labelHidden
 													required
 												/>
@@ -100,8 +106,8 @@ class LoginForm extends React.Component {
 													placeholder="Your Password"
 													label="Password"
 													name="password"
-													value={this.state.password}
-													onChange={this.handlechangeall}
+													value={state.password}
+													onChange={handlechangeall}
 													labelHidden
 													required
 												/>
@@ -137,12 +143,16 @@ class LoginForm extends React.Component {
 				</div>
 			</section>
 		);
-	}
+	
 }
 
 LoginForm.propTypes = propTypes;
 LoginForm.defaultProps = defaultProps;
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	}
+};
 const mapDispatchToProps = (dispatch) => {
 	return { login: (data) => dispatch(loginUser(data)) };
 };
