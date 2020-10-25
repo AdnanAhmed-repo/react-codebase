@@ -15,6 +15,8 @@ import Secondary from "./views/Secondary";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import dashboard from "./views/dashboard";
+import DashConfig from "./views/dashconfig";
+
 // import DashHome from "./views/dashhome";
 
 class App extends React.Component {

@@ -6,6 +6,7 @@ import {
 	AUTH_USER,
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
+	USER_PROFILE,
 } from "./actiontype";
 
 export const fetchRisk=(risk)=>{
@@ -130,6 +131,27 @@ export const signupUser = (dataToSubmit, id) => {
 			});
 	};
 };
+
+
+export const fetchProfile=(user)=>{
+	return{
+	  type:USER_PROFILE,
+	  payload: user
+	}
+  }
+  export const profileUser = ( id) => {
+	  console.log("User Profile data=============",id)
+	  return(dispatch)=>{
+	  axios
+	  .get(`http://localhost:5000/api/profile/profileUser/${id}`)
+	  .then((response) => {
+	   const user = response.data
+	   dispatch(fetchProfile(user));
+		}).catch(err=>{
+		console.log("errror in user profile", err)
+		});
+	}
+  }
 
 export function auth() {
 	const request = axios
