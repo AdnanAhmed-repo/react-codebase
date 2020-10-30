@@ -48,6 +48,10 @@ function DashHome(props) {
 				<div className="live_monitoring sub_section"></div>
 				<div className="security_tools sub_section"></div>
 			</div>
+			<div className="section3">
+				<div className="live_monitoring sub_section"></div>
+				<div className="security_tools sub_section"></div>
+			</div>
 
 		</div>
 	);

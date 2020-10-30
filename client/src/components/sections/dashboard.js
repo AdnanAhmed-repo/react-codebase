@@ -4,7 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
+import VisibilityTwoToneIcon from '@material-ui/icons/VisibilityTwoTone';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import ListItemText from "@material-ui/core/ListItemText";
 import "./dashboard.css"
 import { Switch } from "react-router-dom";
@@ -14,6 +16,7 @@ import DashConfig from "../../views/dashconfig";
 import DashProfile from "../../views/dashprofile";
 import DashHelp from "../../views/dashhelp";
 import DashFAQS from "../../views/dashfaqs";
+import DashAffiliate from "./DashAffiliate";
 // import DashHome from "./DashHome"
 import { Link } from "react-router-dom";
 import {
@@ -81,7 +84,7 @@ const ClippedDrawer = (props) => {
 					Interface
 					<ListItem button>
 						<ListItemIcon>
-							<AssignmentIndTwoTone />
+						<SettingsTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/configure">
 							<ListItemText className="link_text" primary="Configure" />
@@ -89,7 +92,9 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-							<SettingsTwoTone />
+						<AssignmentIndTwoTone />
+
+							
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/settings">
 
@@ -98,10 +103,10 @@ const ClippedDrawer = (props) => {
 
 					</ListItem>
 					<Divider />
-					Help
+					Support
 					<ListItem button>
 						<ListItemIcon>
-							<SubjectTwoTone />
+						<ContactSupportTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/help">
 						<ListItemText className="link_text" primary="Help" />
@@ -109,15 +114,26 @@ const ClippedDrawer = (props) => {
 					</ListItem>
 					<ListItem button>
 						<ListItemIcon>
-							<ContactSupportTwoTone />
+						<SubjectTwoTone />
 						</ListItemIcon>
 						<Link className="sidebar_links" to="/dashboard/faqs">
-						<ListItemText className="link_text" primary="FAQ" />
+						<ListItemText className="link_text" primary="FAQs" />
 						</Link>
 					</ListItem>
+					<Divider />
+					 Other
 					<ListItem button>
 						<ListItemIcon>
-							<ContactSupportTwoTone />
+						<VisibilityTwoToneIcon />
+						</ListItemIcon>
+						<Link className="sidebar_links" to="/dashboard/affiliate">
+						<ListItemText className="link_text" primary="Extra Protection" />
+						</Link>
+					</ListItem>
+					<Divider />
+					<ListItem button>
+						<ListItemIcon>
+							<ExitToAppTwoToneIcon />
 						</ListItemIcon>
 						<Link onClick={handleLogout} className="sidebar_links" to="/">
 						<ListItemText className="link_text" primary="Logout" />
@@ -134,6 +150,7 @@ const ClippedDrawer = (props) => {
 						<ProtectedRoute exact path="/dashboard/help" component={DashHelp} />
 						<ProtectedRoute exact path="/dashboard/configure" component={DashConfig} />
 						<ProtectedRoute exact path="/dashboard/settings" component={DashProfile} />
+						<ProtectedRoute exact path="/dashboard/affiliate" component={DashAffiliate} />
 						<ProtectedRoute exact path="/dashboard/faqs" component={DashFAQS} />
 					</Switch>
 				</div>

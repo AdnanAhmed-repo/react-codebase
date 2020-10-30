@@ -15,8 +15,6 @@ import Secondary from "./views/Secondary";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import dashboard from "./views/dashboard";
-import DashConfig from "./views/dashconfig";
-
 // import DashHome from "./views/dashhome";
 
 class App extends React.Component {
@@ -57,7 +55,7 @@ class App extends React.Component {
 							component={Signup}
 							layout={LayoutSignin}
 						/>
-						<ProtectedRoute path="/dashboard/home" component={dashboard} />
+						<AppRoute path="/dashboard" component={dashboard} />
 						<Redirect to='/login'/>
 					</Switch>
 				)}

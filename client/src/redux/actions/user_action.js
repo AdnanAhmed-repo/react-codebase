@@ -143,7 +143,7 @@ export const fetchProfile=(user)=>{
 	  console.log("User Profile data=============",id)
 	  return(dispatch)=>{
 	  axios
-	  .get(`http://localhost:5000/api/profile/profileUser/${id}`)
+	  .get(`http://localhost:3000/api/profile/profileUser/${id}`)
 	  .then((response) => {
 	   const user = response.data
 	   dispatch(fetchProfile(user));
