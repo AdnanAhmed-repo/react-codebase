@@ -3,6 +3,7 @@ const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const User = require("../../models/User");
 const Email = require("../../models/Email");
+const Password = require("../../models/Password");
 const Url = require("../../models/Url");
 const Device = require("../../models/Device");
 
@@ -34,10 +35,11 @@ router.post("/", async (req, res) => {
 
 		// collecting user's all config details and sending
 		let userEmails = await Email.find({ user: userId });
+		let userPasswords = await Password.find({ user: userId });
 		let userDevices = await Device.find({ user: userId });
 		let userUrls = await Url.find({ user: userId });
-		console.log("DETAILD_", userEmails, userUrls, userDevices)
-		res.status(200).json({ success: true, userEmails, userDevices, userUrls });
+		console.log("DETAILD_", userEmails, userUrls, userDevices, userPasswords)
+		res.status(200).json({ success: true, userEmails, userDevices, userUrls, userPasswords });
 	} catch (error) {
 		console.log(error.message);
 		res.status(500).send("Some error occurred");
@@ -113,6 +115,37 @@ router.post("/add-urls", async (req, res) => {
 		user = await user.save();
 		console.log("URL ADDED USER------", user);
 		res.status(200).json({ success: true, userUrls:addedUrl });
+	} catch (err) {
+		console.log(err.message);
+		res.status(500).send("Server error");
+	}
+});
+
+router.post("/add-passwords", async (req, res) => {
+	const { password, userId } = req.body;
+
+	try {
+		// finding the user with UserID
+		let user = await User.findById(userId);
+
+		if (!user) {
+			return res.json({
+				success: false,
+				message: "Invalid User",
+			});
+		}
+		// creating and adding the new url/ip in table
+		let passwordToAdd = new Password({
+			user: userId,
+			password,
+		});
+
+		// saving url in database and adding it to user
+		let addedPassword = await passwordToAdd.save();
+		user.addedPasswords.push(addedPassword._id);
+		user = await user.save();
+		console.log("PASSWORD ADDED USER------", user);
+		res.status(200).json({ success: true, userPasswords:addedPassword });
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send("Server error");

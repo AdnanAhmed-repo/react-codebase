@@ -8,10 +8,11 @@ import {
 	LOGIN_SUCCESS,
 	FETCH_RISK,
 	USER_PROFILE,
+	FETCH_PASSWORDS
 
 } from "../actions/actiontype";
 
-export const UserReducer = (state = {user:{}, config:{}, risk:"Scanning..." }, action) => {
+export const UserReducer = (state = {user:{}, config:{}, scoreHistory:[], risk:"Scanning...", passwords:"00" }, action) => {
 	switch (action.type) {
 		case SIGNUP_USER:
 			return { ...state, signup: action.payload };
@@ -28,8 +29,11 @@ export const UserReducer = (state = {user:{}, config:{}, risk:"Scanning..." }, a
 			return {...state, config:action.payload}
 		case FETCH_RISK:
 			console.log("FETCHED RISK IN REDUCER", action.payload)
-			return {...state, risk:action.payload.risk}
-		case AUTH_USER:
+			return {...state, risk:action.payload.risk, scoreHistory:action.payload.scoreHistory}
+		case FETCH_PASSWORDS:
+			console.log("FETCHED PASSWORDS IN REDUCER", action.payload)
+			return {...state, passwords:action.payload.passwords, }
+			case AUTH_USER:
 			return { ...state, userData: action.payload };
 		case LOGOUT_USER:
 			return { ...state };

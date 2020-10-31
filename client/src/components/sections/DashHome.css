@@ -108,3 +108,61 @@
 
 	color: rgb(14, 226, 14);
 }
+/* exposed data styling */
+.exposed_data > p {
+	margin: 0;
+	padding: 0px 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: black;
+	border-bottom: 1px solid gray;
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
+}
+.exposed_items {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.exp_item {
+	margin: 10px 20px;
+}
+.exp_item > h1 {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	color: rgb(31, 230, 31);
+	text-shadow: 1px 1px 2px grey;
+}
+.exp_item > p {
+	margin: 0;
+	padding: 0;
+	color: black;
+	font-size: 14px;
+	font-weight: 600;
+}
+.button_div {
+	margin-top: 15px;
+	display: flex;
+	justify-content: center;
+}
+.exposed_button {
+	border: 1px solid blue;
+	background-color: red;
+	color: white;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 8px 20px;
+	border: none;
+	border-radius: 50px;
+	box-shadow: 0 5px 15px -8px black;
+	cursor: pointer;
+	outline: none;
+}
+.exposed_button:hover {
+	background-color: rgb(221, 0, 0);
+}
+

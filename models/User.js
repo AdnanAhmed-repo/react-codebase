@@ -15,6 +15,12 @@ const UserSchema = Schema({
 		type: String,
 		required: true,
 	},
+	exposedPasswords:[],
+	exposedNumber:{
+		type: String,
+		default: "00"
+	},
+	riskHistory:[],
 	riskScore:{
 		type: Number,
 		default: 100
@@ -36,6 +42,12 @@ const UserSchema = Schema({
 		{
 			type: Schema.Types.ObjectId,
 			ref: "email",
+		},
+	],
+	addedPasswords: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "password",
 		},
 	],
 	addedDevices: [

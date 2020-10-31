@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./DashConfig.css";
 import {connect} from 'react-redux'
-import {fetchAllConfig, addDeviceConfig, addEmailConfig, addUrlConfig} from '../../redux/actions/user_action'
+import {fetchAllConfig, addDeviceConfig, addPasswordConfig, addEmailConfig, addUrlConfig} from '../../redux/actions/user_action'
 // import Modal from "../elements/Modal";
 function DashConfig(props) {
 
@@ -14,15 +14,19 @@ function DashConfig(props) {
 		password:""
 	}})
 	const [addEmail, setAddEmail] = useState({email:""})
+	const [addPassword, setAddPassword] = useState({password:""})
+
 	const [user, setUser] = useState({userId:props.userId})
 	
 	useEffect(()=>{
 		props.fetchConfig(user);
-	}, [addUrl, addDevice, addEmail])
+	}, [addUrl, addDevice, addEmail, addPassword])
 
 	const inputHandler=(e)=>{
 		if(e.target.name==="email"){
 			setAddEmail({...addEmail, email:e.target.value})
+		} else if(e.target.name==="password"){
+			setAddPassword({...addPassword, password:e.target.value})
 		} else {
 			setAddUrl({...addUrl, url:e.target.value})
 		}
@@ -45,6 +49,10 @@ function DashConfig(props) {
 						props.addEmail({...user,email:addEmail.email})
 						setAddEmail({...addEmail, email:""})
 						break;
+						case "addPassword":
+							props.addPassword({...user,password:addPassword.password})
+							setAddPassword({...addPassword, password:""})
+							break;
 			default:
 				break;
 		}
@@ -112,6 +120,18 @@ function DashConfig(props) {
 				</div> : <div className="allUrls">No Records Found</div>}
 				<input className="singleInput" name="email" onChange={inputHandler} value={addEmail.email} type="text" placeholder="Enter an E-mail" />
 			</div>
+
+			{/* passwords table */}
+			<div className="emails_table">
+				<div className="table_header">
+					<h2>Passwords</h2>
+					<button onClick={handleAddSubmit} name="addPassword">+ Add</button>
+				</div>
+				{props.config.userPasswords&&props.config.userPasswords.length?<div className="allUrls">	
+					{props.config.userPasswords.map(u=><p key={u.id}>{u.password}</p>)}
+				</div> : <div className="allUrls">No Records Found</div>}
+				<input className="singleInput" name="password" onChange={inputHandler} value={addPassword.password} type="text" placeholder="Enter a password" />
+			</div>
 		</div>
 	);
 }
@@ -128,9 +148,9 @@ const mapDispatchToProps=(dispatch)=>{
 		addUrl:(data)=>dispatch(addUrlConfig(data)),
 		addDevice:(data)=>dispatch(addDeviceConfig(data)),
 		addEmail:(data)=>dispatch(addEmailConfig(data)),
+		addPassword:(data)=>dispatch(addPasswordConfig(data)),
 
 	}
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(DashConfig);
-

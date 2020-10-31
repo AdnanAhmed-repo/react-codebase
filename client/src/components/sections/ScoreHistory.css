@@ -1,0 +1,32 @@
+.modal_container {
+	border: 2px solid red;
+}
+.modal_close {
+	font-size: 16px;
+	margin: 0;
+	border: none;
+	background-color: inherit;
+	color: rgb(204, 204, 204);
+	padding: 5px 15px;
+	position: absolute;
+	border-radius: 2px;
+	right: 0px;
+	top: 0px;
+	outline: none;
+	cursor: pointer;
+}
+.modal_close:hover {
+	background-color: rgba(250, 63, 63, 0.568);
+	color: white;
+}
+.graph_container {
+	box-sizing: border-box;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+.chart {
+	width: 80%;
+}

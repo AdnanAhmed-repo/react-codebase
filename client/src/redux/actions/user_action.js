@@ -7,7 +7,29 @@ import {
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
 	USER_PROFILE,
+	FETCH_PASSWORDS
 } from "./actiontype";
+
+export const fetchPasswords=(passwords)=>{
+	return {
+		type: FETCH_PASSWORDS,
+		payload: passwords
+	}
+}
+
+export const fetchExposedPasswords=(id)=>{
+	return(dispatch)=>{
+		console.log("fetching Passwrds........with::", id)
+		axios.post(`http://localhost:5000/api/dashboard/exposed-data`, {userId:id})
+		.then((response)=>{
+			const passwords = response.data
+			console.log("exposedpasswords AFTER FETCHING___", passwords)
+			dispatch(fetchPasswords(passwords));
+		}).catch(err=>{
+			console.log("ERROR IN FETCHING PASSWORDS ALL!!!!!", err)
+		})
+	}
+}
 
 export const fetchRisk=(risk)=>{
 	return {
@@ -88,6 +110,18 @@ export const addEmailConfig=(data)=>{
 			dispatch(updateConfig(email));
 		}).catch(err=>{
 			console.log("ERROR IN ADDINg emailS!!!!!", err)
+		})
+	}
+}
+
+export const addPasswordConfig=(data)=>{
+	return(dispatch)=>{
+		axios.post(`http://localhost:5000/api/config/add-passwords`, data)
+		.then((response)=>{
+			const password = response.data
+			dispatch(updateConfig(password));
+		}).catch(err=>{
+			console.log("ERROR IN ADDINg passwordS!!!!!", err)
 		})
 	}
 }

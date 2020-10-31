@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const Email = require("../../models/Email");
+const Password = require("../../models/Password");
 const Url = require("../../models/Url");
 const Device = require("../../models/Device");
 const axios = require("axios");
 const FormData = require('form-data');
-const { encodeBase64 } = require("bcryptjs");
+const crypto = require('crypto')
 
 // @route GET api/profile
 //desc Profile Route
@@ -37,7 +38,7 @@ router.post("/risk-score", async (req, res) => {
 
             console.log("===same day===")
             
-		    return res.status(200).json({ success: true, risk:user.riskScore});
+		    return res.status(200).json({ success: true, risk:user.riskScore, scoreHistory:user.riskHistory});
         
         } else {
          
@@ -56,19 +57,108 @@ router.post("/risk-score", async (req, res) => {
             }
 
             user.riskScore = Math.floor((ipRisk + urlRisk + emailRisk)/3)
+            user.riskHistory.push(user.riskScore)
             await user.save()
         }
 		// collecting user's allconfig details and sending
 		// let userDevices = await Device.find({ user: userId });
         
-		res.status(200).json({ success: true, risk:user.riskScore});
+		res.status(200).json({ success: true, risk:user.riskScore, scoreHistory:user.riskHistory});
 	} catch (error) {
 		console.log(error.response);
 		res.status(500).send("Some error occurred");
 	}
 });
 
+router.post("/exposed-data", async (req, res) => {
+    const { userId } = req.body;
+    // const vtKey = process.env.VIRUSTOTAL_APIKEY
+
+	try {
+		
+		// verifying validity of provided userId
+		console.log("INSIDE BACKEND....", userId)
+		let user = await User.findById(userId);
+		
+
+		if (!user) {
+			return res.json({
+				success: false,
+				message: "Invalid User",
+			});
+        }
+        console.log("USER>>>>>", user)
+        let date = new Date()
+        let day = date.getDate()
+
+        if(user.lastActive===day){
+
+            console.log("===same day===")
+            
+		    return res.status(200).json({ success: true, passwords:user.exposedNumber});
+        
+        } else {
+         
+            let userPasswords = await Password.find({ user: userId });
+            
+            // console.log("USER EXPOSED PASSWORDS____",userPasswords)
+            let exposed = await passwordScanner(userPasswords);
+            let result = await exposed.length
+            if (result<10){
+                result = "0" + result
+            }
+            user.exposedNumber = result.toString()
+            user.exposedPasswords = exposed
+            await user.save()
+        }
+		// collecting user's allconfig details and sending
+		// let userDevices = await Device.find({ user: userId });
+        
+		res.status(200).json({ success: true, passwords:user.exposedNumber});
+	} catch (error) {
+		console.log("ERROR IN ROUTE",error);
+		res.status(500).send("Some error occurred");
+	}
+});
+
 module.exports = router;
+
+const passwordScanner = async(arr) => {
+    try{
+        
+        let exposedPasswords = []
+    
+        for(let i=0; i<arr.length;i++){
+            console.log("SCANNing-------", arr[i].password)
+            const sha1 = crypto.createHash('sha1')
+            const sha256 = crypto.createHash('sha256')
+            const md5 = crypto.createHash('md5')
+            let partial1 = sha1.update(arr[i].password).digest('hex').slice(0, 10)
+            let partial2 = md5.update(arr[i].password).digest('hex').slice(0, 10)
+            let partial3 = sha256.update(arr[i].password).digest('hex').slice(0, 10)
+            let baseUrl = "https://api.enzoic.com/passwords?"
+            let url = baseUrl + `partial_sha1=${partial1}&partial_md5=${partial2}&partial_sha256=${partial3}`
+            console.log("urlllll", url)
+            let config = {
+                method: 'get',
+                url: url,
+                headers: { 
+                  'Authorization': 'Basic MDdkZDFjOTgzZmFjNDE3OThkYjc5MzlmYmM5ZTMzM2U6cEVYcFkzcypWWGgtbiZjc1I/ejVWdyRwLXk1Vy15aHk='
+                }
+            };
+            const response = await axios(config)
+            console.log("SCANNED PASS----", arr[i].password, response.data)
+            if(response.data.candidates[0].revealedInExposure){
+                exposedPasswords.push(arr[i].password)
+            }
+        }
+        return exposedPasswords
+    } catch(err) {
+        console.log("ERROR IN PASSWROD SCANNING", err.message)
+    }
+    
+}
+
 
 const separator =(arr)=>{
     const ips = []
