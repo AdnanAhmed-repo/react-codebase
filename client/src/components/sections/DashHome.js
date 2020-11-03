@@ -23,7 +23,7 @@ function DashHome(props) {
 			props.risk(id)
 			setBname(JSON.parse(localStorage.getItem('user')).bname)
 		}
-	},[localStorage.getItem('user'), props.riskValue])
+	},[localStorage.getItem('user'), props.riskValue, props.exposedPasswords])
 
 	return (
 			<div className="dashboard">
