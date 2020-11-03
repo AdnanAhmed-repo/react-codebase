@@ -40,7 +40,7 @@ const App=(props)=>{
                 {
                     ticks:{
                         min: 0,
-                        max: 100,
+                        max: 99,
                         stepSize: 10
                     }
                 }

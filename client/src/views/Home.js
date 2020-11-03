@@ -43,13 +43,13 @@ class Home extends React.Component {
           <SectionHeader data={genericSection01Header} className="reveal-from-bottom" />
           <div className="reveal-from-bottom">
             <a
-              data-video="https://youtu.be/QyI8fXAiEr4"
-              href="#0"
+              data-video="https://www.youtube.com/embed/QEsk1AQMAg"
+              href="https://www.youtube.com/embed/QEsk1AQMAg"
               aria-controls="video-modal"
               onClick={this.openModal}
             >
               <Image
-                src={require('./../assets/images/Why.jpg')}
+                src={require('./../assets/images/vid.png')}
                 alt="Video"
                 width={712}
                 height={400} />
@@ -59,7 +59,7 @@ class Home extends React.Component {
             id="video-modal"
             show={this.state.videoModalActive}
             handleClose={this.closeModal}
-            video="https://youtu.be/QyI8fXAiEr4"
+            video="https://youtube.com/embed/mQEsk1AQMAg"
             videoTag="iframe" />
         </GenericSection>        
         <FeaturesSplit invertMobile topDivider imageFill />
