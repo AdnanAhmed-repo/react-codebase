@@ -1,0 +1,7 @@
+.tab1 > .inprogress > p,
+.tab1 > .patched > p {
+	font-size: 30px;
+	width: 80%;
+	line-height: 28px;
+	letter-spacing: normal;
+}
