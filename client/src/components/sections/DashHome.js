@@ -88,7 +88,7 @@ function DashHome(props) {
 									<AutorenewIcon fontSize="large"/>
 								</div>
 								<div className="inprogress">
-									<h1>23</h1>
+									<h1>0</h1>
 									<p>Patch-ups in progress</p>
 								</div>
 							</div>
@@ -97,7 +97,7 @@ function DashHome(props) {
 									<CheckIcon fontSize="large"/>
 								</div>
 								<div className="patched">
-									<h1>13</h1>
+									<h1>0</h1>
 									<p>Vulnerabilities patched</p>
 								</div>
 							</div>
