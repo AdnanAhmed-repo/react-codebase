@@ -16,11 +16,12 @@ export const fetchPasswords=(passwords)=>{
 		payload: passwords
 	}
 }
+const PORT = process.env.PORT || 5000;
 
 export const fetchExposedPasswords=(id)=>{
 	return(dispatch)=>{
 		console.log("fetching Passwrds........with::", id)
-		axios.post(`http://localhost:5000/api/dashboard/exposed-data`, {userId:id})
+		axios.post(`http://localhost:${PORT}/api/dashboard/exposed-data`, {userId:id})
 		.then((response)=>{
 			const passwords = response.data
 			console.log("exposedpasswords AFTER FETCHING___", passwords)
@@ -40,7 +41,7 @@ export const fetchRisk=(risk)=>{
 export const fetchAllRisk=(id)=>{
 	return(dispatch)=>{
 		console.log("fetching Risk........with::", id)
-		axios.post(`http://localhost:5000/api/dashboard/risk-score`, {userId:id})
+		axios.post(`http://localhost:${PORT}/api/dashboard/risk-score`, {userId:id})
 		.then((response)=>{
 			const risk = response.data
 			console.log("RISK AFTER FETCHING___", risk)
@@ -60,7 +61,7 @@ export const fetchConfig=(config)=>{
 export const fetchAllConfig=(id)=>{
 	return(dispatch)=>{
 		console.log("fetching all.............with::", id)
-		axios.post(`http://localhost:5000/api/config`, id)
+		axios.post(`http://localhost:${PORT}/api/config`, id)
 		.then((response)=>{
 			const allConfig = response.data
 			console.log("AFTER FETCHING___", allConfig)
@@ -82,7 +83,7 @@ export const updateConfig=(config)=>{
 
 export const addUrlConfig=(data)=>{
 	return(dispatch)=>{
-		axios.post(`http://localhost:5000/api/config/add-urls`, data)
+		axios.post(`http://localhost:${PORT}/api/config/add-urls`, data)
 		.then((response)=>{
 			const url = response.data
 			dispatch(updateConfig(url));
@@ -93,7 +94,7 @@ export const addUrlConfig=(data)=>{
 }
 export const addDeviceConfig=(data)=>{
 	return(dispatch)=>{
-		axios.post(`http://localhost:5000/api/config/add-devices`, data)
+		axios.post(`http://localhost:${PORT}/api/config/add-devices`, data)
 		.then((response)=>{
 			const device = response.data
 			dispatch(updateConfig(device));
@@ -104,7 +105,7 @@ export const addDeviceConfig=(data)=>{
 }
 export const addEmailConfig=(data)=>{
 	return(dispatch)=>{
-		axios.post(`http://localhost:5000/api/config/add-emails`, data)
+		axios.post(`http://localhost:${PORT}/api/config/add-emails`, data)
 		.then((response)=>{
 			const email = response.data
 			dispatch(updateConfig(email));
@@ -116,7 +117,7 @@ export const addEmailConfig=(data)=>{
 
 export const addPasswordConfig=(data)=>{
 	return(dispatch)=>{
-		axios.post(`http://localhost:5000/api/config/add-passwords`, data)
+		axios.post(`http://localhost:${PORT}/api/config/add-passwords`, data)
 		.then((response)=>{
 			const password = response.data
 			dispatch(updateConfig(password));
@@ -140,7 +141,7 @@ export const userSuccess = (user) => {
 export const loginUser = (dataToSubmit) => {
 	return (dispatch) => {
 		axios
-			.post(`http://localhost:5000/api/users/login`, dataToSubmit)
+			.post(`http://localhost:${PORT}/api/users/login`, dataToSubmit)
 			.then((response) => {
 				const user = response.data;
 				dispatch(userSuccess(user));
@@ -155,7 +156,7 @@ export const signupUser = (dataToSubmit, id) => {
 	let newData = { ...dataToSubmit, stripeId: id };
 	return (dispatch) => {
 		axios
-			.post(`http://localhost:5000/api/users/register`, newData)
+			.post(`http://localhost:${PORT}/api/users/register`, newData)
 			.then((response) => {
 				const user = response.data;
 				dispatch(userSuccess(user));
@@ -177,7 +178,7 @@ export const fetchProfile=(user)=>{
 	  console.log("User Profile data=============",id)
 	  return(dispatch)=>{
 	  axios
-	  .get(`http://localhost:3000/api/profile/profileUser/${id}`)
+	  .get(`http://localhost:${PORT}/api/profile/profileUser/${id}`)
 	  .then((response) => {
 	   const user = response.data
 	   dispatch(fetchProfile(user));
@@ -189,7 +190,7 @@ export const fetchProfile=(user)=>{
 
 export function auth() {
 	const request = axios
-		.get(`http://localhost:5000/api/users/auth`)
+		.get(`http://localhost:${PORT}/api/users/auth`)
 		.then((response) => response.data);
 
 	return {
@@ -199,7 +200,7 @@ export function auth() {
 }
 export function logoutUser() {
 	const request = axios
-		.get(`http://localhost:5000/api/users/logout`)
+		.get(`http://localhost:${PORT}/api/users/logout`)
 		.then((response) => response.data);
 
 	return {
