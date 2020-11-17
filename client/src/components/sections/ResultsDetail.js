@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Modal from "react-modal"
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import CheckIcon from '@material-ui/icons/Check';
@@ -10,11 +10,10 @@ Modal.setAppElement('#root')
 
 
 const App=(props)=>{
-    const [patchedData, setPatchedData] = useState(false)
-    const [progressData, setProgressData] = useState(true)
-  
+
     return(
             <Modal  isOpen={props.open} onRequestClose={()=>props.setModal(false)}>
+                {console.log('vuls in modal%%%%%%%%%%', props.data.vulPatched)}
                 <button className="modal_close" onClick={()=>props.setModal(false)}>x</button>
                 <Tabs>
                     <TabList >
@@ -41,42 +40,51 @@ const App=(props)=>{
                     </TabList>
                         
                     <TabPanel>
-                        {patchedData?
+                        {props.data.vulInProgress&&props.data.vulInProgress.length?
                             <div>
                                 <table>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Type</th>
-                                        <th>Payment</th>
-                                    </tr>
-                                    <tr>
-                                        <td>samplename</td>
-                                        <td>some description</td>
-                                        <td>sometype</td>
-                                        <td>paid</td>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {props.data.vulInProgress.map(ele=><tr>
+                                            <td>{ele.vulName}</td>
+                                            <td>{ele.vulDesc}</td>
+                                            <td>{ele.vulType}</td>
+                                            <td>paid</td>
+                                        </tr>)}
+                                        
+                                    </tbody>
                                 </table>
                             </div> : <h1>No data</h1>
                         }
                         
                     </TabPanel>
                     <TabPanel>
-                        {progressData?
+                        {props.data.vulPatched&&props.data.vulPatched.length?
                             <div>
                                 <table>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Type</th>
-                                        <th>Payment</th>
-                                    </tr>
-                                    <tr>
-                                        <td>samplename</td>
-                                        <td>some description</td>
-                                        <td>sometype</td>
-                                        <td>paid</td>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {props.data.vulPatched.map(ele=><tr>
+                                            <td>{ele.vulName}</td>
+                                            <td>{ele.vulDesc}</td>
+                                            <td>{ele.vulType}</td>
+                                            <td>paid</td>
+                                        </tr>)}
+                                    </tbody>
                                 </table>
                             </div> : <h1>No data</h1>
                         }
