@@ -7,8 +7,27 @@ import {
 	LOGOUT_USER,
 	LOGIN_SUCCESS,
 	USER_PROFILE,
-	FETCH_PASSWORDS
+	FETCH_PASSWORDS,
+	FETCH_VULNERABILITIES
 } from "./actiontype";
+
+const FetchVulSuccess = (data) =>{
+	return {
+		type: FETCH_VULNERABILITIES,
+		payload: data
+	}
+}
+export const fetchVulnerabilities = (id) =>{
+	return (dispatch)=>{
+		axios.get(`http://localhost:5000/api/dashboard/vulnerabilities/${id}`)
+		.then(response=>{
+			dispatch(FetchVulSuccess(response.data))
+		})
+		.catch(err=>{
+			console.log('ERROR IN FETCHING VULNEARBILITIES---', err)
+		})
+	}
+}
 
 export const fetchPasswords=(passwords)=>{
 	return {
@@ -16,7 +35,6 @@ export const fetchPasswords=(passwords)=>{
 		payload: passwords
 	}
 }
-const PORT = process.env.PORT || 5000;
 
 export const fetchExposedPasswords=(id)=>{
 	return(dispatch)=>{

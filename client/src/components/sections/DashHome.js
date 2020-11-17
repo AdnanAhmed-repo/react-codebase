@@ -6,7 +6,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import CheckIcon from '@material-ui/icons/Check';
 // import { Link } from "react-router-dom";
 import "./DashHome.css"
-import { fetchAllRisk, fetchExposedPasswords } from "../../redux/actions/user_action";
+import { fetchAllRisk, fetchExposedPasswords, fetchVulnerabilities } from "../../redux/actions/user_action";
 import { connect } from "react-redux";
 
 
@@ -27,6 +27,7 @@ function DashHome(props) {
 			let id=JSON.parse(localStorage.getItem('user')).id
 			props.passwords(id)
 			props.risk(id)
+			props.fetchVulnerabilities(id)
 			setBname(JSON.parse(localStorage.getItem('user')).bname)
 		}
 	},[localStorage.getItem('user'), props.riskValue, props.exposedPasswords])
@@ -34,7 +35,7 @@ function DashHome(props) {
 	return (
 			<div className="dashboard">
 			<ScoreHistory chartValues={historyChart} open={modal} setModal={setModal}/>
-			<ResultsDetail data={""} open={resultsModal} setModal={setResultsModal}/>
+			<ResultsDetail data={props.vulnerabilities} open={resultsModal} setModal={setResultsModal}/>
 			{console.log("USER IN DASHBOARD_____", bname, "RISSKKK", risk)}
 				<div className="welcome_section">
 					<div className="welcome_bname">
@@ -81,14 +82,14 @@ function DashHome(props) {
 					{/* results sub section */}
 					<div className="results_detail sub_section">
 						<p>Vulnerability Scanning and Patch-Ups</p>
-						
+						{console.log('VVVVVVVVVVV------', props.vulnerabilities)}
 						<div className="results_body">
 							<div className="body_left">
 								<div className="res_icon">
 									<AutorenewIcon fontSize="large"/>
 								</div>
 								<div className="inprogress">
-									<h1>0</h1>
+									<h1>{props.vulnerabilities.vulInProgress&&props.vulnerabilities.vulInProgress.length}</h1>
 									<p>Patch-ups in progress</p>
 								</div>
 							</div>
@@ -97,7 +98,7 @@ function DashHome(props) {
 									<CheckIcon fontSize="large"/>
 								</div>
 								<div className="patched">
-									<h1>0</h1>
+									<h1>{props.vulnerabilities.vulPatched&&props.vulnerabilities.vulPatched.length}</h1>
 									<p>Vulnerabilities patched</p>
 								</div>
 							</div>
@@ -128,14 +129,16 @@ const mapStateToProps=(state)=>{
 	return {
 		riskValue: state.risk,
 		exposedPasswords: state.passwords,
-		historyChart: state.scoreHistory
+		historyChart: state.scoreHistory,
+		vulnerabilities: state.vulnerabilities
 	}
 }
 
 const mapDispatchToProps=(dispatch)=>{
 	return {
 		risk: (id)=>dispatch(fetchAllRisk(id)),
-		passwords: (id)=>dispatch(fetchExposedPasswords(id))
+		passwords: (id)=>dispatch(fetchExposedPasswords(id)),
+		fetchVulnerabilities: (id)=>dispatch(fetchVulnerabilities(id))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DashHome);

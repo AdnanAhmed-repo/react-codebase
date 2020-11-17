@@ -4,6 +4,7 @@ const User = require("../../models/User");
 const Email = require("../../models/Email");
 const Password = require("../../models/Password");
 const Url = require("../../models/Url");
+const Vulnerability = require("../../models/Vulnerability");
 const Device = require("../../models/Device");
 const axios = require("axios");
 const FormData = require('form-data');
@@ -120,6 +121,21 @@ router.post("/exposed-data", async (req, res) => {
 		res.status(500).send("Some error occurred");
 	}
 });
+
+router.get('/vulnerabilities/:userId', async(req, res)=>{
+    try {
+        const {userId} = req.params
+        const vulInProgress = await Vulnerability.find({user: userId, status: "In Progress"})
+        const vulPatched = await Vulnerability.find({user: userId, status: "Patched"})
+
+        return res.status(200).json({vulInProgress, vulPatched})
+        
+    } catch (error) {
+        console.log("ERROR IN GETTING VULNERABILITIES",error);
+		res.status(500).send("Some error occurred");
+    }
+
+})
 
 module.exports = router;
 
